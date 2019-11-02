@@ -4,19 +4,29 @@ from rest_framework.views import APIView
 from api.model.Postagem import Postagem
 from api.model.Evolucao import Evolucao
 
+from .permissions import IsOwnerOrReadOnly
+
 from .serializers import PostagemSerializer, UserSerializer, EvolucaoSerializer
 from rest_framework import generics, status, viewsets
 from django.contrib.auth import authenticate
 from rest_framework.exceptions import PermissionDenied
 
+from rest_framework.permissions import AllowAny,IsAuthenticated,IsAuthenticatedOrReadOnly,IsAdminUser
+
+#from rest_framework.permissions import
 
 class EvolucaoViewSet(viewsets.ModelViewSet):
     queryset = Evolucao.objects.all()
     serializer_class = EvolucaoSerializer
 
+    permission_classes = [IsOwnerOrReadOnly]
+
 class PostagemViewSet(viewsets.ModelViewSet):
     queryset = Postagem.objects.all()
     serializer_class = PostagemSerializer
+
+
+   # permission_classes = [IsAdminUser]
     
     def destroy(self, request, *args, **kwargs):
         postagem = Postagem.objects.get(pk=self.kwargs["pk"])
