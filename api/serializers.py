@@ -2,8 +2,16 @@
 
 from rest_framework import serializers
 from api.model.Postagem import Postagem
+from api.model.Evolucao import Evolucao
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
+
+
+class EvolucaoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Evolucao
+        fields = '__all__'
+        
 
 class UserSerializer(serializers.ModelSerializer):
 

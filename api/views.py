@@ -1,17 +1,18 @@
-#pip3 install django
-#pip3 install djangorestframework
-
-#building APIs with Django
-
 from django.shortcuts import render
-from rest_framework.response import Response #Manda resposta em JSON
+from rest_framework.response import Response
 from rest_framework.views import APIView 
 from api.model.Postagem import Postagem
-from .serializers import PostagemSerializer, UserSerializer
+from api.model.Evolucao import Evolucao
+
+from .serializers import PostagemSerializer, UserSerializer, EvolucaoSerializer
 from rest_framework import generics, status, viewsets
 from django.contrib.auth import authenticate
 from rest_framework.exceptions import PermissionDenied
 
+
+class EvolucaoViewSet(viewsets.ModelViewSet):
+    queryset = Evolucao.objects.all()
+    serializer_class = EvolucaoSerializer
 
 class PostagemViewSet(viewsets.ModelViewSet):
     queryset = Postagem.objects.all()
@@ -40,3 +41,4 @@ class LoginView(APIView):
                 return Response({"token": user.auth_token.key}) #RETORNA UM TOKEN PRO USUARIO QUE ACERTAR USERNAME E SENHA
             else:
                 return Response({"error": "Senha Incorreta"}, status=status.HTTP_400_BAD_REQUEST)  
+
