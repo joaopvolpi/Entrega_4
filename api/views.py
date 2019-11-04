@@ -41,7 +41,6 @@ class PostagemViewSet(viewsets.ModelViewSet):
 
 class PostagemList(APIView):
 
-    permission_classes = [IsAdminUser]
 
     def get(self, request):
 
@@ -51,13 +50,15 @@ class PostagemList(APIView):
         return Response(data)
 
     def post(self, request):
+
+        ###
+        permission_classes = [IsAdminUser] #SOMENTE O ADMIN PODE POSTAR METAS, MAS NAO ESTA FUNCIONANDO
+        ###
         nome = request.data['nome']
         descricao = request.data['descricao']       
         postagem = Postagem(nome= nome, descricao=descricao)
         postagem.save()
         data = PostagemSerializer(postagem).data
-
-        permission_classes = [IsAdminUser] #SOMENTE O ADMIN PODE POSTAR METAS, MAS NAO ESTA FUNCIONANDOOO
         
         return Response(data)
 
