@@ -1,3 +1,7 @@
+
+#ESSE ARQUIVO NAO ESTÁ SENDO USADO
+
+
 from rest_framework.permissions import BasePermission, SAFE_METHODS
 #from api.model.Evolucao import Evolucao
 

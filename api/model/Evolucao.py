@@ -4,7 +4,7 @@ from django.utils import timezone
 
 from django.contrib.auth.models import User
 
-#A evolucao consiste do valor produzido pelo funcionario x 
+#A EVOLUCAO CONSISTE DO VALOR PRODUZUDO PELO FUNCIONARIO X EM DETERMINADA DATA
 
 class Evolucao(models.Model):
     
